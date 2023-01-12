@@ -43,7 +43,7 @@ function wp_learn_rest_enqueue_script() {
 	wp_register_script(
 		'wp-learn-rest-api',
 		plugin_dir_url( __FILE__ ) . 'wp-learn-rest-api.js',
-		array( 'wp-api' ),
+		array( 'jquery' ),
 		time(),
 		true
 	);
