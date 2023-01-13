@@ -44,7 +44,10 @@ const loadPostsButton = document.getElementById( 'wp-learn-rest-api-button' );
 if ( typeof ( loadPostsButton ) != 'undefined' && loadPostsButton != null ) {
     loadPostsButton.addEventListener( 'click', function () {
         const allPosts = new wp.api.collections.Posts();
-        allPosts.fetch().done( function ( posts ) {
+        allPosts.fetch(
+            { data: { "_fields": "title" } }
+        ).done( function ( posts ) {
+            console.log(posts);
             const textarea = document.getElementById( 'wp-learn-posts' );
             posts.forEach( function ( post ) {
                 textarea.value += post.title.rendered + '\n'
