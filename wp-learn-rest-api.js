@@ -1,38 +1,34 @@
+/* global wp_learn_ajax */
+
 /**
- * JQuery to handle the Ajax request
+ * Javascript fetch to handle the Ajax request
  */
-jQuery( document ).ready(
-    function ( $ ) {
-        const loadPostsButton = $( '#wp-learn-ajax-button' );
-        if ( typeof ( loadPostsButton ) != 'undefined' && loadPostsButton != null ) {
-            loadPostsButton.on(
-                'click',
-                function ( event ) {
-                    $.post(
-                        wp_learn_ajax.ajax_url,
-                        {
-                            'action': 'learn_fetch_posts',
-                        },
-                        function ( posts ) {
-                            const textarea = $( '#wp-learn-posts' );
-                            posts.forEach( function ( post ) {
-                                textarea.append( post.post_title + '\n' )
-                            } );
-                        },
-                    )
-                },
-            );
-        }
-    },
-);
+const loadPostsButton = document.getElementById('wp-learn-ajax-button');
+const clearPostsButton = document.getElementById('wp-learn-clear-posts');
+const payload = {action: 'learn_fetch_posts'}
+
+if (loadPostsButton) loadPostsButton.onclick = () => {
+  fetch(wp_learn_ajax.ajax_url + '?' + (new URLSearchParams(payload)).toString(), {
+    method: 'post'
+  })
+    .then(res => res.json())
+    .then((posts) => {
+      const textarea = document.getElementById('wp-learn-posts');
+      
+      posts.forEach(post => {
+        textarea.value += post.post_title + '\n';
+      });
+    }).catch(function (err) {
+
+        // There was an error
+        console.warn('Something went wrong.', err);
+    });
+}
 
 /**
  * Clear the text area button
  */
-const clearPostsButton = document.getElementById( 'wp-learn-clear-posts' );
-if ( typeof ( clearPostsButton ) != 'undefined' && clearPostsButton != null ) {
-    clearPostsButton.addEventListener( 'click', function () {
-        const textarea = document.getElementById( 'wp-learn-posts' )
-        textarea.value = ''
-    } );
-}
+if (clearPostsButton) clearPostsButton.onclick = () => {
+  const textarea = document.getElementById('wp-learn-posts')
+  textarea.value = ''
+};
