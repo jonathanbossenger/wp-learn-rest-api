@@ -26,11 +26,30 @@ function wp_learn_rest_submenu() {
 function wp_learn_rest_render_admin_page(){
 	?>
     <div class="wrap" id="wp_learn_admin">
-        <h1>Admin</h1>
-        <button id="wp-learn-rest-api-button">Load Posts</button>
-        <button id="wp-learn-clear-posts">Clear Posts</button>
-        <h2>Posts</h2>
-        <textarea id="wp-learn-posts" cols="125" rows="15"></textarea>
+        <div>
+            <h1>Admin</h1>
+            <button id="wp-learn-rest-api-button">Load Posts</button>
+            <button id="wp-learn-clear-posts">Clear Posts</button>
+            <h2>Posts</h2>
+            <textarea id="wp-learn-posts" cols="100" rows="15"></textarea>
+        </div>
+
+        <div style="width:50%;">
+            <h2>Add Post</h2>
+            <form>
+                <div>
+                    <label for="email">Post Title</label>
+                    <input type="text" id="wp-learn-post-title" placeholder="Title">
+                </div>
+                <div>
+                    <label for="email">Post Content</label>
+                    <textarea id="wp-learn-post-content" cols="100" rows="10"></textarea>
+                </div>
+                <div>
+                    <input type="button" id="wp-learn-submit-post" value="Submit">
+                </div>
+            </form>
+        </div>
     </div>
 	<?php
 }
