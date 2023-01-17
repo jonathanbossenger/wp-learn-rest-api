@@ -47,7 +47,6 @@ if ( typeof ( loadPostsButton ) != 'undefined' && loadPostsButton != null ) {
         allPosts.fetch(
             { data: { "_fields": "title" } }
         ).done( function ( posts ) {
-            console.log(posts);
             const textarea = document.getElementById( 'wp-learn-posts' );
             posts.forEach( function ( post ) {
                 textarea.value += post.title.rendered + '\n'
