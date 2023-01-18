@@ -38,18 +38,32 @@ function wp_learn_rest_render_admin_page(){
             <h2>Add Post</h2>
             <form>
                 <div>
-                    <label for="email">Post Title</label>
+                    <label for="wp-learn-post-title">Post Title</label>
                     <input type="text" id="wp-learn-post-title" placeholder="Title">
                 </div>
                 <div>
-                    <label for="email">Post Content</label>
+                    <label for="wp-learn-post-content">Post Content</label>
                     <textarea id="wp-learn-post-content" cols="100" rows="10"></textarea>
                 </div>
                 <div>
-                    <input type="button" id="wp-learn-submit-post" value="Submit">
+                    <input type="button" id="wp-learn-submit-post" value="Add">
                 </div>
             </form>
         </div>
+
+        <div style="width:50%;">
+            <h2>Delete Post</h2>
+            <form>
+                <div>
+                    <label for="wp-learn-post-id">Post ID</label>
+                    <input type="text" id="wp-learn-post-id" placeholder="ID">
+                </div>
+                <div>
+                    <input type="button" id="wp-learn-delete-post" value="Delete">
+                </div>
+            </form>
+        </div>
+
     </div>
 	<?php
 }

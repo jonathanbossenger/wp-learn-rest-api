@@ -2,16 +2,18 @@ function clearFields() {
     document.getElementById( 'wp-learn-posts' ).value = '';
     document.getElementById( 'wp-learn-post-title' ).value = '';
     document.getElementById( 'wp-learn-post-content' ).value = '';
+    document.getElementById( 'wp-learn-post-id' ).value = '';
 }
 
 function loadPosts() {
+    clearFields();
     const allPosts = new wp.api.collections.Posts();
     allPosts.fetch(
-        { data: { "_fields": "title" } }
+        { data: { "_fields": "id, title" } }
     ).done( function ( posts ) {
         const textarea = document.getElementById( 'wp-learn-posts' );
         posts.forEach( function ( post ) {
-            textarea.value += post.title.rendered + '\n'
+            textarea.value += post.id  + ', ' +  post.title.rendered + '\n'
         } );
     } );
 }
@@ -31,28 +33,36 @@ function submitPost() {
     } );
 }
 
-/**
- * Clear the text area button
- */
+function deletePost(){
+    const id = document.getElementById( 'wp-learn-post-id' ).value;
+    const post = new wp.api.models.Post( { id: id } );
+    post.destroy().done( function ( post ) {
+        alert( 'Post deleted!' );
+        clearFields();
+        loadPosts();
+    } );
+}
+
 const clearPostsButton = document.getElementById( 'wp-learn-clear-posts' );
 if ( typeof ( clearPostsButton ) != 'undefined' && clearPostsButton != null ) {
     clearPostsButton.addEventListener( 'click', clearFields );
 }
 
-/**
- * Load the posts using the REST API and the Backbone.js client
- */
 const loadPostsButton = document.getElementById( 'wp-learn-rest-api-button' );
 if ( typeof ( loadPostsButton ) != 'undefined' && loadPostsButton != null ) {
     loadPostsButton.addEventListener( 'click', loadPosts );
 }
 
-/**
- * Submit a post
- */
 const submitPostButton = document.getElementById( 'wp-learn-submit-post' );
 if ( typeof ( submitPostButton ) != 'undefined' && submitPostButton != null ) {
     submitPostButton.addEventListener( 'click', function () {
         submitPost();
+    } );
+}
+
+const deletePostButton = document.getElementById( 'wp-learn-delete-post' );
+if ( typeof ( deletePostButton ) != 'undefined' && deletePostButton != null ) {
+    deletePostButton.addEventListener( 'click', function () {
+        deletePost();
     } );
 }
