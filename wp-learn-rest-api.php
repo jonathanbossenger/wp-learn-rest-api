@@ -73,6 +73,10 @@ function wp_learn_rest_render_admin_page(){
  */
 add_action( 'admin_enqueue_scripts', 'wp_learn_rest_enqueue_script' );
 function wp_learn_rest_enqueue_script() {
+    $screen = get_current_screen();
+    if ( $screen->id !== 'toplevel_page_wp_learn_admin' ) {
+        return;
+    }
 	wp_register_script(
 		'wp-learn-rest-api',
 		plugin_dir_url( __FILE__ ) . 'wp-learn-rest-api.js',

@@ -44,25 +44,21 @@ function deletePost(){
 }
 
 const clearPostsButton = document.getElementById( 'wp-learn-clear-posts' );
-if ( typeof ( clearPostsButton ) != 'undefined' && clearPostsButton != null ) {
+if ( clearPostsButton ) {
     clearPostsButton.addEventListener( 'click', clearFields );
 }
 
 const loadPostsButton = document.getElementById( 'wp-learn-rest-api-button' );
-if ( typeof ( loadPostsButton ) != 'undefined' && loadPostsButton != null ) {
+if ( loadPostsButton ) {
     loadPostsButton.addEventListener( 'click', loadPosts );
 }
 
 const submitPostButton = document.getElementById( 'wp-learn-submit-post' );
-if ( typeof ( submitPostButton ) != 'undefined' && submitPostButton != null ) {
-    submitPostButton.addEventListener( 'click', function () {
-        submitPost();
-    } );
+if ( submitPostButton ) {
+    submitPostButton.addEventListener( 'click', submitPost );
 }
 
 const deletePostButton = document.getElementById( 'wp-learn-delete-post' );
-if ( typeof ( deletePostButton ) != 'undefined' && deletePostButton != null ) {
-    deletePostButton.addEventListener( 'click', function () {
-        deletePost();
-    } );
+if ( deletePostButton ) {
+    deletePostButton.addEventListener( 'click', deletePost );
 }
