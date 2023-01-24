@@ -2,7 +2,7 @@
 /**
  * Plugin Name:     WP Learn REST API
  * Description:     Learning about the WP REST API
- * Version:         0.0.3
+ * Version:         0.0.4
  */
 
 /**
