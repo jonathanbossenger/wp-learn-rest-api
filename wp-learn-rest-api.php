@@ -5,19 +5,31 @@
  * Version:         0.0.4
  */
 
+register_meta(
+	'post',
+	'url',
+	array(
+		'single'       => true,
+		'type'         => 'string',
+		'default'      => '',
+		'show_in_rest' => true,
+	)
+);
+
 /**
  * Create an admin page to show the form submissions
  */
 add_action( 'admin_menu', 'wp_learn_rest_submenu', 11 );
 function wp_learn_rest_submenu() {
-	add_menu_page(
-		esc_html__( 'WP Learn Admin Page', 'wp_learn' ),
-		esc_html__( 'WP Learn Admin Page', 'wp_learn' ),
-		'manage_options',
-		'wp_learn_admin',
-		'wp_learn_rest_render_admin_page',
-		'dashicons-admin-tools'
-	);
+    add_submenu_page(
+        'tools.php',
+	    esc_html__( 'WP Learn REST API', 'wp_learn' ),
+	    esc_html__( 'WP Learn REST API', 'wp_learn' ),
+        'manage_options',
+        'wp-learn-rest-api',
+        'wp_learn_rest_render_admin_page',
+        10
+    );
 }
 
 /**
@@ -45,11 +57,40 @@ function wp_learn_rest_render_admin_page() {
 					<label for="wp-learn-post-content">Post Content</label>
 					<textarea id="wp-learn-post-content" cols="100" rows="10"></textarea>
 				</div>
+                <div>
+                    <label for="wp-learn-post-url-value">URL Value</label>
+                    <input type="text" id="wp-learn-post-url-value" placeholder="Value">
+                </div>
 				<div>
 					<input type="button" id="wp-learn-submit-post" value="Add">
 				</div>
 			</form>
 		</div>
+
+        <div style="width:50%;">
+            <h2>Update Post</h2>
+            <form>
+                <div>
+                    <label for="wp-learn-update-post-id">Post ID</label>
+                    <input type="text" id="wp-learn-update-post-id" placeholder="ID">
+                </div>
+                <div>
+                    <label for="wp-learn-update-post-title">Post Title</label>
+                    <input type="text" id="wp-learn-update-post-title" placeholder="Title">
+                </div>
+                <div>
+                    <label for="wp-learn-update-post-content">Post Content</label>
+                    <textarea id="wp-learn-update-post-content" cols="100" rows="10"></textarea>
+                </div>
+                <div>
+                    <label for="wp-learn-update-post-url-value">URL Value</label>
+                    <input type="text" id="wp-learn-update-post-url-value" placeholder="Value">
+                </div>
+                <div>
+                    <input type="button" id="wp-learn-update-post" value="Update">
+                </div>
+            </form>
+        </div>
 
 		<div style="width:50%;">
 			<h2>Delete Post</h2>
@@ -74,7 +115,7 @@ function wp_learn_rest_render_admin_page() {
 add_action( 'admin_enqueue_scripts', 'wp_learn_rest_enqueue_script' );
 function wp_learn_rest_enqueue_script() {
 	$screen = get_current_screen();
-	if ( $screen->id !== 'toplevel_page_wp_learn_admin' ) {
+	if ( $screen->id !== 'tools_page_wp-learn-rest-api' ) {
 		return;
 	}
 	wp_register_script(

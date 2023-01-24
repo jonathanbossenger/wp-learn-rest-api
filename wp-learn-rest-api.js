@@ -24,13 +24,40 @@ function loadPosts() {
 function submitPost() {
     const title = document.getElementById( 'wp-learn-post-title' ).value;
     const content = document.getElementById( 'wp-learn-post-content' ).value;
+    const url_value = document.getElementById( 'wp-learn-post-url-value' ).value;
+
     const post = new wp.api.models.Post( {
         title: title,
         content: content,
-        status: 'publish'
+        status: 'publish',
+        meta: {
+            'url': url_value
+        }
     } );
     post.save().done( function ( post ) {
         alert( 'Post saved!' );
+        clearFields();
+        loadPosts();
+    } );
+}
+
+function updatePost() {
+    const id = document.getElementById( 'wp-learn-update-post-id' ).value;
+    const title = document.getElementById( 'wp-learn-update-post-title' ).value;
+    const content = document.getElementById( 'wp-learn-update-post-content' ).value;
+    const url_value = document.getElementById( 'wp-learn-update-post-url-value' ).value;
+
+    const post = new wp.api.models.Post( {
+        id: id,
+        title: title,
+        content: content,
+        status: 'publish',
+        meta: {
+            'url': url_value
+        }
+    } );
+    post.save().done( function ( post ) {
+        alert( 'Post updated!' );
         clearFields();
         loadPosts();
     } );
@@ -59,6 +86,11 @@ if ( loadPostsButton ) {
 const submitPostButton = document.getElementById( 'wp-learn-submit-post' );
 if ( submitPostButton ) {
     submitPostButton.addEventListener( 'click', submitPost );
+}
+
+const updatePostButton = document.getElementById( 'wp-learn-update-post' );
+if ( updatePostButton ) {
+    updatePostButton.addEventListener( 'click', updatePost );
 }
 
 const deletePostButton = document.getElementById( 'wp-learn-delete-post' );
