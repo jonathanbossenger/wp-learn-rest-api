@@ -9,7 +9,10 @@ function loadPosts() {
     clearFields();
     const allPosts = new wp.api.collections.Posts();
     allPosts.fetch(
-        { data: { "_fields": "id, title" } }
+        { data: {
+            "includes": "16, 17, 18",
+            "_fields": "id, title"
+        } }
     ).done( function ( posts ) {
         const textarea = document.getElementById( 'wp-learn-posts' );
         posts.forEach( function ( post ) {
