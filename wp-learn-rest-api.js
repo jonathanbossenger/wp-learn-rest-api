@@ -9,10 +9,7 @@ function loadPosts() {
     clearFields();
     const allPosts = new wp.api.collections.Posts();
     allPosts.fetch(
-        { data: {
-            "includes": "16, 17, 18",
-            "_fields": "id, title"
-        } }
+        { data: { "_fields": "id, title" } }
     ).done( function ( posts ) {
         const textarea = document.getElementById( 'wp-learn-posts' );
         posts.forEach( function ( post ) {
@@ -31,12 +28,14 @@ function submitPost() {
         content: content,
         status: 'publish',
         meta: {
-            'url': url_value
+            'url': url_value,
+            '_note': 'This is a note'
         }
     } );
+    console.log(post);
     post.save().done( function ( post ) {
+        console.log(post);
         alert( 'Post saved!' );
-        clearFields();
         loadPosts();
     } );
 }
@@ -53,12 +52,14 @@ function updatePost() {
         content: content,
         status: 'publish',
         meta: {
-            'url': url_value
+            'url': url_value,
+            '_note': 'This is a note'
         }
     } );
+    console.log(post);
     post.save().done( function ( post ) {
+        console.log( post );
         alert( 'Post updated!' );
-        clearFields();
         loadPosts();
     } );
 }
@@ -68,7 +69,6 @@ function deletePost(){
     const post = new wp.api.models.Post( { id: id } );
     post.destroy().done( function ( post ) {
         alert( 'Post deleted!' );
-        clearFields();
         loadPosts();
     } );
 }
