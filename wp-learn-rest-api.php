@@ -75,7 +75,7 @@ function wp_learn_rest_render_admin_page() {
 add_action( 'admin_enqueue_scripts', 'wp_learn_rest_enqueue_script' );
 function wp_learn_rest_enqueue_script() {
 	$screen = get_current_screen();
-	if ( $screen->id !== 'toplevel_page_wp_learn_admin' ) {
+	if ( $screen->id !== 'tools_page_wp-learn-rest-api' ) {
 		return;
 	}
 	wp_register_script(
