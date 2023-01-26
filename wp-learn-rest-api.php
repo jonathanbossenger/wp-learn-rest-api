@@ -6,17 +6,18 @@
  */
 
 /**
- * Create an admin page to show the form submissions
+ * Create an Tools sub menu to show the admin form
  */
 add_action( 'admin_menu', 'wp_learn_rest_submenu', 11 );
 function wp_learn_rest_submenu() {
-	add_menu_page(
-		esc_html__( 'WP Learn Admin Page', 'wp_learn' ),
-		esc_html__( 'WP Learn Admin Page', 'wp_learn' ),
+	add_submenu_page(
+		'tools.php',
+		esc_html__( 'WP Learn REST API', 'wp_learn' ),
+		esc_html__( 'WP Learn REST API', 'wp_learn' ),
 		'manage_options',
-		'wp_learn_admin',
+		'wp-learn-rest-api',
 		'wp_learn_rest_render_admin_page',
-		'dashicons-admin-tools'
+		10
 	);
 }
 
