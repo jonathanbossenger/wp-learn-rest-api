@@ -16,17 +16,6 @@ register_meta(
 	)
 );
 
-register_meta(
-	'post',
-	'_note',
-	array(
-		'single'       => true,
-		'type'         => 'string',
-		'default'      => '',
-		'show_in_rest' => true,
-	)
-);
-
 /**
  * Create an admin page to show the form submissions
  */

@@ -28,13 +28,10 @@ function submitPost() {
         content: content,
         status: 'publish',
         meta: {
-            'url': url_value,
-            '_note': 'This is a note'
+            'url': url_value
         }
     } );
-    console.log(post);
     post.save().done( function ( post ) {
-        console.log(post);
         alert( 'Post saved!' );
         loadPosts();
     } );
@@ -52,15 +49,12 @@ function updatePost() {
         content: content,
         status: 'publish',
         meta: {
-            'url': url_value,
-            '_note': 'This is a note'
+            'url': url_value
         }
     } );
     console.log(post);
     post.save().done( function ( post ) {
-        console.log( post );
         alert( 'Post updated!' );
-        loadPosts();
     } );
 }
 
