@@ -10,7 +10,6 @@ function loadPosts() {
     const allPosts = new wp.api.collections.Posts();
     allPosts.fetch(
         { data: {
-            "includes": "16, 17, 18",
             "_fields": "id, title"
         } }
     ).done( function ( posts ) {
