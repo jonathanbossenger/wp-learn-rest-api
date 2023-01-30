@@ -6,7 +6,7 @@
  */
 
 /**
- * Create an Tools sub menu to show the admin form
+ * Create a Tools sub menu to show the admin form
  */
 add_action( 'admin_menu', 'wp_learn_rest_submenu', 11 );
 function wp_learn_rest_submenu() {
