@@ -2,19 +2,94 @@
 /**
  * Plugin Name:     WP Learn REST API
  * Description:     Learning about the WP REST API
- * Version:         0.0.4
+ * Version:         0.0.5
  */
 
-register_meta(
-	'post',
-	'url',
-	array(
-		'single'       => true,
-		'type'         => 'string',
-		'default'      => '',
-		'show_in_rest' => true,
-	)
-);
+add_action('init', 'wp_learn_plugin_init');
+function wp_learn_plugin_init(){
+
+	register_meta(
+		'post',
+		'url',
+		array(
+			'single'       => true,
+			'type'         => 'string',
+			'default'      => '',
+			'show_in_rest' => true,
+		)
+	);
+
+    /**
+     * Register a book custom post type
+     */
+	register_post_type(
+		'book',
+		array(
+			'labels'       => array(
+				'name'          => __( 'Books' ),
+				'singular_name' => __( 'Book' )
+			),
+			'public'       => true,
+			'has_archive'  => true,
+			'show_in_rest' => true,
+			'supports'     => array(
+				'title',
+				'editor',
+				'thumbnail',
+				'excerpt',
+				'custom-fields',
+				'revisions',
+			),
+			'taxonomies'   => array(
+				'category',
+				'post_tag',
+			),
+		)
+    );
+
+	/**
+	 * Register the isbn meta field on the book custom post type
+	 */
+	register_meta(
+		'book',
+		'isbn',
+		array(
+			'single'       => true,
+			'type'         => 'string',
+			'default'      => '',
+		)
+	);
+
+}
+
+
+
+add_action( 'rest_api_init', 'wp_learn_rest_api_init' );
+function wp_learn_rest_api_init() {
+    /**
+     * Register the isbn REST field on the book custom post type
+     */
+    register_rest_field(
+        'book',
+        'isbn',
+        array(
+            'get_callback'    => 'wp_learn_rest_get_isbn',
+            'update_callback' => 'wp_learn_rest_update_isbn',
+            'schema'          => array(
+                'description' => __( 'The ISBN of the book' ),
+                'type'        => 'string',
+            ),
+        )
+    );
+}
+
+function wp_learn_rest_get_isbn( $book ){
+	return  get_post_meta($book['id'], 'isbn', true);
+}
+
+function wp_learn_rest_update_isbn( $value, $book ){
+    return update_post_meta( $book->ID, 'isbn', $value );
+}
 
 /**
  * Create an admin page to show the form submissions
