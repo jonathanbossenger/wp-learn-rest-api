@@ -2,19 +2,8 @@
 /**
  * Plugin Name:     WP Learn REST API
  * Description:     Learning about the WP REST API
- * Version:         0.0.4
+ * Version:         0.0.3-v2
  */
-
-register_meta(
-	'post',
-	'url',
-	array(
-		'single'       => true,
-		'type'         => 'string',
-		'default'      => '',
-		'show_in_rest' => true,
-	)
-);
 
 /**
  * Create an admin page to show the form submissions

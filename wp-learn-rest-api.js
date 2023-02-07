@@ -27,9 +27,6 @@ function submitPost() {
         title: title,
         content: content,
         status: 'publish',
-        meta: {
-            'url': url_value
-        }
     } );
     post.save().done( function ( post ) {
         alert( 'Post saved!' );
@@ -48,9 +45,6 @@ function updatePost() {
         title: title,
         content: content,
         status: 'publish',
-        meta: {
-            'url': url_value
-        }
     } );
     console.log(post);
     post.save().done( function ( post ) {
