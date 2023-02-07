@@ -46,10 +46,6 @@ function wp_learn_rest_render_admin_page() {
 					<label for="wp-learn-post-content">Post Content</label>
 					<textarea id="wp-learn-post-content" cols="100" rows="10"></textarea>
 				</div>
-                <div>
-                    <label for="wp-learn-post-url-value">URL Value</label>
-                    <input type="text" id="wp-learn-post-url-value" placeholder="Value">
-                </div>
 				<div>
 					<input type="button" id="wp-learn-submit-post" value="Add">
 				</div>
@@ -70,10 +66,6 @@ function wp_learn_rest_render_admin_page() {
                 <div>
                     <label for="wp-learn-update-post-content">Post Content</label>
                     <textarea id="wp-learn-update-post-content" cols="100" rows="10"></textarea>
-                </div>
-                <div>
-                    <label for="wp-learn-update-post-url-value">URL Value</label>
-                    <input type="text" id="wp-learn-update-post-url-value" placeholder="Value">
                 </div>
                 <div>
                     <input type="button" id="wp-learn-update-post" value="Update">

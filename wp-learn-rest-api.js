@@ -26,7 +26,7 @@ function submitPost() {
     const post = new wp.api.models.Post( {
         title: title,
         content: content,
-        status: 'publish',
+        status: 'publish'
     } );
     post.save().done( function ( post ) {
         alert( 'Post saved!' );
@@ -43,8 +43,7 @@ function updatePost() {
     const post = new wp.api.models.Post( {
         id: id,
         title: title,
-        content: content,
-        status: 'publish',
+        content: content
     } );
     console.log(post);
     post.save().done( function ( post ) {
