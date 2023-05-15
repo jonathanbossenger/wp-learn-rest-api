@@ -43,9 +43,30 @@ function wp_learn_rest_enqueue_script() {
 	wp_register_script(
 		'wp-learn-rest-api',
 		plugin_dir_url( __FILE__ ) . 'wp-learn-rest-api.js',
-		array( 'wp-api' ),
+		array( 'jquery' ),
 		time(),
 		true
 	);
 	wp_enqueue_script( 'wp-learn-rest-api' );
+
+	/**
+	 * Localize the script with the Ajax url to handle ajax requests
+	 */
+	wp_localize_script(
+		'wp-learn-rest-api',
+		'wp_learn_ajax',
+		array(
+			'ajax_url' => admin_url( 'admin-ajax.php' ),
+		)
+	);
+}
+
+/**
+ * Handles the learn_fetch_posts AJAX request.
+ */
+add_action( 'wp_ajax_learn_fetch_posts', 'wp_learn_ajax_fetch_posts' );
+function wp_learn_ajax_fetch_posts() {
+	$posts = get_posts();
+	wp_send_json( $posts );
+	wp_die(); // All ajax handlers die when finished
 }
