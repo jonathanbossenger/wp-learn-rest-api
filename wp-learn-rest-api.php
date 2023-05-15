@@ -10,13 +10,13 @@
  */
 add_action( 'admin_menu', 'wp_learn_rest_submenu', 11 );
 function wp_learn_rest_submenu() {
-	add_menu_page(
-		esc_html__( 'WP Learn Admin Page', 'wp_learn' ),
-		esc_html__( 'WP Learn Admin Page', 'wp_learn' ),
+	add_submenu_page(
+		'tools.php',
+		esc_html__( 'WP Learn REST Admin Page', 'wp_learn' ),
+		esc_html__( 'WP Learn REST Admin Page', 'wp_learn' ),
 		'manage_options',
 		'wp_learn_admin',
-		'wp_learn_rest_render_admin_page',
-		'dashicons-admin-tools'
+		'wp_learn_rest_render_admin_page'
 	);
 }
 
