@@ -27,7 +27,7 @@ function wp_learn_rest_render_admin_page() {
 	?>
     <div class="wrap" id="wp_learn_admin">
         <h1>Admin</h1>
-        <button id="wp-learn-rest-api-button">Load Posts via REST</button>
+        <button id="wp-learn-ajax-button">Load Posts via Ajax</button>
         <button id="wp-learn-clear-posts">Clear Posts</button>
         <h2>Posts</h2>
         <textarea id="wp-learn-posts" cols="125" rows="15"></textarea>
